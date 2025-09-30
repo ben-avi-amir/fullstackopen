@@ -4,6 +4,23 @@ const Header = ({text}) => <h1>{text}</h1>
 
 const Button = ({onClick, text}) => <button onClick={onClick}>{text}</button>
 
+const Statistics = ({good, neutral, bad}) => {
+  const all = good + neutral + bad
+  if (all === 0) {
+    return <div>No feedback given</div>
+  }
+  return (
+    <div>
+      <div>good {good}</div>
+      <div>neutral {neutral}</div>
+      <div>bad {bad}</div>
+      <div>all {all}</div>
+      <div>average {(good - bad) / all}</div>
+      <div>positive {good / all * 100} %</div>
+    </div>
+  )
+}
+
 
 
 const App = () => {
@@ -19,9 +36,7 @@ const App = () => {
       <Button onClick={() => setNeutral(neutral + 1)} text="neutral" />
       <Button onClick={() => setBad(bad + 1)} text="bad" />
       <Header text="statistics" />
-      <div>good {good}</div>
-      <div>neutral {neutral}</div>
-      <div>bad {bad}</div>
+      <Statistics good={good} neutral={neutral} bad={bad} />
     </div>
   )
 }
